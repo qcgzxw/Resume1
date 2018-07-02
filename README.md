@@ -37,21 +37,12 @@ Apache版本：2.4.23 (Win32) OpenSSL
 * index.php
 * readme.md
 
-## 部分SQL命令
-``` 建表语句
-create table user
-(
-        phonenum varchar(15) primary key not null,
-        sex int(2),
-        password char(50) not null,
-        last_time timestamp
-)
-```
+## 程序介绍
+* 界面
+index.php界面注册登陆卡片切换，不同的按钮实现不同的功能。
 
-```插入
-insert into user(phonenum,sex,password,last_time) values('15927171563', '0', md5('123456'))
-```
+* 注册
+用户第一次使用需注册，输入电话号码、性别和密码后，点击注册按钮，Ajax提交数据到注册接口后，后端处理数据，经过简单的安全性验证后，将数据存至数据库和Redis同时返回状态码0、1、2，前端通过分析返回码来判断用户注册是否成功并给出相应的弹窗提醒。
 
-```登陆后更新时间
-update user set last_time = '2018-06-27 02:55:53' where phonenum = 15945678912
-```
+* 登陆
+用户填写电话号码和密码后，点击登陆按钮，Ajax提交数据到登陆接口后，后端处理数据，进行简单的安全性验证后，将电话号码和密码在Redis和mysql中验证，验证成功则返回状态码和上次登陆时间，前端通过判断返回的数据来给出相应的登陆成功或者登陆失败的提醒。
